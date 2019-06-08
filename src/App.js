@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import './App.css';
+import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+import axios from 'axios';;
 // import { withStyles } from '@material-ui/core/styles';
- import Button from '@material-ui/core/Button';
+ 
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
 // import CardActions from '@material-ui/core/CardActions';
 // import CardContent from '@material-ui/core/CardContent';
 // import CardMedia from '@material-ui/core/CardMedia';
 // import Typography from '@material-ui/core/Typography';
-
-import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 // const styles = {
 //   card: {
 //     maxWidth: 545,
@@ -27,6 +27,7 @@ export default class App extends Component {
     this.state={
           data:{}
     }
+    this.delete=this.delete.bind(this);
   }
   componentDidMount(){
     fetch("http://localhost:3000/api/movies").then(response=>response.json()).then((data)=>{console.log(data);
@@ -35,6 +36,11 @@ export default class App extends Component {
       },()=>console.log(data))
     })
   }
+   delete(id){
+    //  const url="http://localhost:3000/api/movies";
+    fetch('http://localhost:3000/api/movies/' + id, { 
+  method: 'DELETE' 
+}).then(response=>{return response.json()}).then(data=>console.log(data)).catch(err=>console.log(err));}
   render() {
   
     let movies=this.state.data.length>0&&this.state.data.map((movie,index)=>{
@@ -58,9 +64,12 @@ export default class App extends Component {
          <p>Type:{movie.type}</p>
       
         <Button size="small" color="primary">
-        Edit
+        <Link to={{ 
+                 pathname: './editmovie/'+movie.id,
+               }}>   Edit
+     </Link>
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={(e) =>this.delete(movie.id,this)}>
           Delete
         </Button>
     

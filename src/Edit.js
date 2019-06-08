@@ -1,8 +1,8 @@
 
 import React, {Component} from 'react';
 // import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-export default class Add extends Component {
+
+export default class Edit extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,8 +19,28 @@ export default class Add extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.logChange=this.logChange.bind(this);
     }
-
-    handleSubmit(event) {
+    componentDidMount(){
+        const id=this.props.match.params.id;
+        fetch(`http://localhost:3000/api/movies/${id}`)
+        .then(response => response.json()).then(response => {
+            this.setState({ 
+                id: response.data,
+                image_url:  response.data,
+                language:  response.data,
+                name:  response.data,
+                production_house:  response.data,
+                rating:  response.data,
+                type:  response.data,
+                year:  response.data,
+                date: response.data 
+              });
+        })
+        .then(response => console.log(response))
+.catch(err => {
+            console.log(err)
+          })
+    }
+    handleSubmit(event,id) {
         event.preventDefault()
         var data = {
             id: this.state.id,
@@ -34,23 +54,26 @@ export default class Add extends Component {
             date:this.state.date
         }
         console.log(data)
-        fetch("http://localhost:3000/api/movies", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        }).then(function(response) {
-            if (response.status >= 400) {
-              throw new Error("Bad response from server");
-            }
-            return response.json();
-        }).then(function(data) {
-            console.log(data)    
-            if(data === "success"){
-               console.log("success");  
-            }
-        }).catch(function(err) {
-            console.log(err)
-        });
+        fetch('http://localhost:3000/api/movies/' + this.props.match.params.id).then((response) => {
+            response.json().then((response) => {
+              console.log(response);
+            })
+          }).then(response => {
+            this.setState({ 
+                id: response.data.id,
+                image_url:  response.data.image_url,
+                language:  response.data.language,
+                name:  response.data.name,
+                production_house:  response.data.production_house,
+                rating:  response.data.rating,
+                type:  response.data.type,
+                year:  response.data.year,
+                date: response.data.date 
+              });
+        })
+.catch(err => {
+            console.error(err)
+          })
     }
 
     logChange(e) {
@@ -59,7 +82,7 @@ export default class Add extends Component {
 
     render() {
         return (
-            <div className="container register-form" align="center">
+            <div className="container register-form">
                 <form onSubmit={this.handleSubmit} method="POST" align="center">
                     <label>Id</label><br/>
                     <input name="id" placeholder="id" 
@@ -71,9 +94,11 @@ export default class Add extends Component {
             onChange={(e) => this.logChange(e)}
             value={this.state.name}
           /><br/><label>Poster:</label><br/>
-            <input type="text" onChange={this.logChange}  value={this.state.image_url} placeholder='poster' name='image_url' /><br/><label>Language:</label><br/>
-                    <input type="text" onChange={this.logChange}  value={this.state.language} placeholder='language' name='language' /><br/><label>Production House:</label><br/>
-                    <input type="text" onChange={this.logChange}  value={this.state.production_house} placeholder='Production House' name='production_house' /><br/>
+                    <input placeholder="image-url" name="image"
+            onChange={(e) => this.logChange(e)}
+            value={this.state.image_url}
+          /><br/><label>Language:</label><br/>
+                    <input type="text" onChange={this.logChange}  value={this.state.language} placeholder='language' name='language' /><br/>
                     <label>Type:</label><br/>
                     <input type="text" onChange={this.logChange}  value={this.state.type }placeholder='type' name='type'/><br/><label>Rating:</label><br/>
                     <input type="number" onChange={this.logChange}  value={this.state.rating }placeholder='rating' name='rating'/><br/><label>Year:</label><br/>

@@ -8,10 +8,15 @@
 }
 .container{
    background: powderblue;
+   border: 1px solid
 }
 body{
    background: steelblue;
 }
-CardContent{
-   background: navy; 
+.submit-section{
+   margin-right:140px;
+}
+.register-form{
+   margin-top: 30px;
+  width: 400px;
 }
