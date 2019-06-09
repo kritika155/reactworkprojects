@@ -35,8 +35,20 @@ export default class Edit extends Component {
             date: user.date });
         });
     }
-    handleSubmit(event,id) {
-        event.preventDefault()
+    updateBlogPost(id, data) {
+      return fetch('http://localhost:3000/api/movies/' + id, {
+          method: 'PUT',
+          body: JSON.stringify(data),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      }).then(res => {
+          return res;
+      }).catch(err => err);
+  }
+  
+    handleSubmit(data) {
+     
         var data = {
             id: this.state.id,
             image_url:this.state.image_url,
@@ -49,27 +61,8 @@ export default class Edit extends Component {
             date:this.state.date
         }
         console.log(data);
-         const { match: { params } } = this.props;
-        fetch('http://localhost:3000/api/movies/' + this.props.match.params.id).then((response) => {
-            response.json().then((response) => {
-              console.log(response);
-            })
-          }).then(response => {
-            this.setState({ 
-                id: response.id,
-                image_url:  response.image_url,
-                language:  response.language,
-                name:  response.name,
-                production_house:  response.production_house,
-                rating:  response.rating,
-                type:  response.type,
-                year:  response.year,
-                date: response.date 
-              });
-        })
-.catch(err => {
-            console.error(err)
-          })
+        this.updateBlogPost(this.state.id, data);
+
     }
 
     logChange(e) {
