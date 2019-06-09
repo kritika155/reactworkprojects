@@ -66,20 +66,10 @@ export default class Edit extends Component {
     }
 
     logChange(e) {
-        // const { match: { params } } = this.props;
-        // axios.get(`http://localhost:3000/api/movies/${params.id}}`)
-        // .then(({ data: user }) => {
-        //   console.log('user', user);
-    
-        //   this.setState({[e.target.name]: user },()=>console.log(this.state.name));
-        // });
-        this.setState({[e.target.name]: e.target.value},()=>console.log(this.state.name));  
+      this.setState({[e.target.name]: e.target.value},()=>console.log(this.state.name));  
     }
 
     render() {
-    //   let filterProducts=this.state.user.filter((user,index)=>{
-    //     return 
-    // });
         return (
             <div className="container register-form">
                 <form onSubmit={this.handleSubmit} method="POST" align="center">

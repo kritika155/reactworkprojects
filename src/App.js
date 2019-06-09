@@ -3,22 +3,7 @@ import './App.css';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 import { Container, Row, Col} from 'react-bootstrap';
-// import { withStyles } from '@material-ui/core/styles';
- 
-// import Card from '@material-ui/core/Card';
-// import CardActionArea from '@material-ui/core/CardActionArea';
-// import CardActions from '@material-ui/core/CardActions';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Typography from '@material-ui/core/Typography';
-// const styles = {
-//   card: {
-//     maxWidth: 545,
-//   },
-//   media: {
-//     height: 440,
-//   },
-// };
+
 export default class App extends Component {
   constructor(props){
     super(props);
@@ -71,43 +56,7 @@ export default class App extends Component {
         </Col>
         </Row>
         </Container>
-      
-        
-       {/* <div className="container">
-         <div className="row">
-           <div className="col-md-6"><img src={movie.image_url} alt={movie.name} className="movie"/></div>
-           <div className="col-md-6">
-           <h1>Movie Name:
-          {movie.name}</h1>
-         
-             <p>Production House:{movie.production_house}</p>
-         <p>Language:{movie.language}</p>
-         <p>Year:{movie.year}</p>
-         <p>Rating:{movie.rating}</p>
-         <p>Type:{movie.type}</p>
-      
-        <Button size="small" color="primary">
-        <Link to={{ 
-                 pathname: './editmovie/'+this.movie.id,
-               }}>   Edit
-     </Link>
-        </Button>
-        <Button size="small" color="primary" onClick={(e) =>this.delete(movie.id,this)}>
-          Delete
-        </Button>
-    
-          </div>
-         </div>
-         </div> */}
-
-       
-          {/* <div className="rows">
-         
-        <div className="col-md-6"><img src={movie.image_url} alt={movie.name}/></div> 
-        <div className="col-md-6">{movie.name}</div>
-          </div> */}
-       
-        </div>
+      </div>
       );
     })
     return (
