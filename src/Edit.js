@@ -24,7 +24,7 @@ export default class Edit extends Component {
         .then(({ data: user }) => {
           console.log('user', user);
     
-          this.setState({ user });
+          this.setState({ user:user });
         });
     
 //         fetch(`http://localhost:3000/api/movies/${params.id}`)
