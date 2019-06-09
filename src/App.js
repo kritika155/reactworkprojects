@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import axios from 'axios';;
+import { Container, Row, Col} from 'react-bootstrap';
 // import { withStyles } from '@material-ui/core/styles';
  
 // import Card from '@material-ui/core/Card';
@@ -47,14 +45,12 @@ export default class App extends Component {
       return(
         <div key={index} className="box">
         
-     
-      
-        
-       <div className="container">
-         <div className="row">
-           <div className="col-md-6"><img src={movie.image_url} alt={movie.name} className="movie"/></div>
-           <div className="col-md-6">
-           <h1>Movie Name:
+     <Container>
+       <Row>
+         <Col sm={6}>
+           <div className="boxe"><img src={movie.image_url} alt={movie.name} className="movie"/></div>
+          </Col>
+          <Col sm={6}>  <h1>Movie Name:
           {movie.name}</h1>
          
              <p>Production House:{movie.production_house}</p>
@@ -72,10 +68,37 @@ export default class App extends Component {
         <Button size="small" color="primary" onClick={(e) =>this.delete(movie.id,this)}>
           Delete
         </Button>
+        </Col>
+        </Row>
+        </Container>
+      
+        
+       {/* <div className="container">
+         <div className="row">
+           <div className="col-md-6"><img src={movie.image_url} alt={movie.name} className="movie"/></div>
+           <div className="col-md-6">
+           <h1>Movie Name:
+          {movie.name}</h1>
+         
+             <p>Production House:{movie.production_house}</p>
+         <p>Language:{movie.language}</p>
+         <p>Year:{movie.year}</p>
+         <p>Rating:{movie.rating}</p>
+         <p>Type:{movie.type}</p>
+      
+        <Button size="small" color="primary">
+        <Link to={{ 
+                 pathname: './editmovie/'+this.movie.id,
+               }}>   Edit
+     </Link>
+        </Button>
+        <Button size="small" color="primary" onClick={(e) =>this.delete(movie.id,this)}>
+          Delete
+        </Button>
     
           </div>
          </div>
-         </div>
+         </div> */}
 
        
           {/* <div className="rows">

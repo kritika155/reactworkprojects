@@ -1,7 +1,6 @@
 
 import React, {Component} from 'react';
-// import ReactDOM from 'react-dom';
-
+import axios from 'axios';
 export default class Edit extends Component {
     constructor(props) {
         super(props)
@@ -20,25 +19,23 @@ export default class Edit extends Component {
         this.logChange=this.logChange.bind(this);
     }
     componentDidMount(){
-        const id=this.props.match.params.id;
-        fetch(`http://localhost:3000/api/movies/${id}`)
-        .then(response => response.json()).then(response => {
-            this.setState({ 
-                id: response.data,
-                image_url:  response.data,
-                language:  response.data,
-                name:  response.data,
-                production_house:  response.data,
-                rating:  response.data,
-                type:  response.data,
-                year:  response.data,
-                date: response.data 
-              });
-        })
-        .then(response => console.log(response))
-.catch(err => {
-            console.log(err)
-          })
+        const { match: { params } } = this.props;
+        axios.get(`http://localhost:3000/api/movies/${params.id}}`)
+        .then(({ data: user }) => {
+          console.log('user', user);
+    
+          this.setState({ user });
+        });
+    
+//         fetch(`http://localhost:3000/api/movies/${params.id}`)
+//          .then(({ data: user }) => {
+//             console.log('user', user);
+      
+//             this.setState({user });
+//           })
+// .catch(err => {
+//             console.log(err)
+//           })
     }
     handleSubmit(event,id) {
         event.preventDefault()
@@ -77,7 +74,14 @@ export default class Edit extends Component {
     }
 
     logChange(e) {
-        this.setState({[e.target.name]: e.target.value});  
+        const { match: { params } } = this.props;
+        axios.get(`http://localhost:3000/api/movies/${params.id}}`)
+        .then(({ data: user }) => {
+          console.log('user', user);
+    
+          this.setState({[e.target.name]: user },()=>console.log(this.state.name));
+        });
+        this.setState({[e.target.name]: e.target.value},()=>console.log(this.state.name));  
     }
 
     render() {
