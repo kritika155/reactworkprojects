@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
 import axios from 'axios';
+import Axios from 'axios';
 export default class Edit extends Component {
     constructor(props) {
         super(props)
@@ -18,22 +19,28 @@ export default class Edit extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.logChange=this.logChange.bind(this);
     }
-    componentDidMount(){
+    async componentDidMount(){
+        // const id=this.props.match.params.id;
         const { match: { params } } = this.props;
-        axios.get(`http://localhost:3000/api/movies/${params.id}}`)
-        .then(({ data: user }) => {
-          console.log('user', user);
+        const {data}=await Axios.get(`http://localhost:3000/api/movies/${params.id}`);
+        this.setState({user:data},()=>console.log(data));
+        // const { match: { params } } = this.props;
+        // axios.get(`http://localhost:3000/api/movies/${params.id}}`)
+        // .then(({ data: user }) => {
+        //   console.log('user', user);
     
-          this.setState({  id: user.id,
-            image_url:   user.image_url,
-            language:  user.language,
-            name:  user.name,
-            production_house:   user.production_house,
-            rating:  user.rating,
-            type: user.type,
-            year: user.year,
-            date: user.date });
-        });
+        //   this.setState({ user });
+        // });
+    
+//         fetch(`http://localhost:3000/api/movies/${params.id}`)
+//          .then(({ data: user }) => {
+//             console.log('user', user);
+      
+//             this.setState({user });
+//           })
+// .catch(err => {
+//             console.log(err)
+//           })
     }
     handleSubmit(event,id) {
         event.preventDefault()
@@ -48,23 +55,22 @@ export default class Edit extends Component {
             year: this.state.year,
             date:this.state.date
         }
-        console.log(data);
-         const { match: { params } } = this.props;
+        console.log(data)
         fetch('http://localhost:3000/api/movies/' + this.props.match.params.id).then((response) => {
             response.json().then((response) => {
               console.log(response);
             })
           }).then(response => {
             this.setState({ 
-                id: response.id,
-                image_url:  response.image_url,
-                language:  response.language,
-                name:  response.name,
-                production_house:  response.production_house,
-                rating:  response.rating,
-                type:  response.type,
-                year:  response.year,
-                date: response.date 
+                id: response.data.id,
+                image_url:  response.data.image_url,
+                language:  response.data.language,
+                name:  response.data.name,
+                production_house:  response.data.production_house,
+                rating:  response.data.rating,
+                type:  response.data.type,
+                year:  response.data.year,
+                date: response.data.date 
               });
         })
 .catch(err => {
@@ -73,20 +79,17 @@ export default class Edit extends Component {
     }
 
     logChange(e) {
-        // const { match: { params } } = this.props;
-        // axios.get(`http://localhost:3000/api/movies/${params.id}}`)
-        // .then(({ data: user }) => {
-        //   console.log('user', user);
+        const { match: { params } } = this.props;
+        axios.get(`http://localhost:3000/api/movies/${params.id}}`)
+        .then(({ data: user }) => {
+          console.log('user', user);
     
-        //   this.setState({[e.target.name]: user },()=>console.log(this.state.name));
-        // });
+          this.setState({[e.target.name]: user },()=>console.log(this.state.name));
+        });
         this.setState({[e.target.name]: e.target.value},()=>console.log(this.state.name));  
     }
 
     render() {
-    //   let filterProducts=this.state.user.filter((user,index)=>{
-    //     return 
-    // });
         return (
             <div className="container register-form">
                 <form onSubmit={this.handleSubmit} method="POST" align="center">
