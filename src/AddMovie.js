@@ -2,6 +2,9 @@
 import React, {Component} from 'react';
 // import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import dateFormat from 'dateformat';
+import Moment from 'react-moment';
+import 'moment-timezone';
 export default class Add extends Component {
     constructor(props) {
         super(props)
@@ -78,7 +81,7 @@ export default class Add extends Component {
                     <input type="text" onChange={this.logChange}  value={this.state.type }placeholder='type' name='type'/><br/><label>Rating:</label><br/>
                     <input type="number" onChange={this.logChange}  value={this.state.rating }placeholder='rating' name='rating'/><br/><label>Year:</label><br/>
                     <input type="number" onChange={this.logChange}  value={this.state.year }placeholder='year' name='year'/><br/><label>Movie Release Date:</label><br/>
-                    <input type="date" onChange={this.logChange}  value={this.state.date }placeholder='date' name='date'/>
+                    <input type="date" dateFormat="yyyy/mm/dd" onChange={this.logChange}  value={this.state.date }placeholder='date' name='date'/>
                     <div className="submit-section" align="center"><br/>
                         <button className="btn btn-primary" >Submit</button>
                     </div>
