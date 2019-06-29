@@ -99,7 +99,7 @@ this.delete=this.delete.bind(this);
   }
    return (
       <div className="container">
-         <input type="text"  id="usr" placeholder="search" onChange={(e)=>{this.handleChange(e.target.value)}}></input>
+      <input type="text"  id="usr" placeholder="search by movie name(A-Z or a-z)" onChange={(e)=>{this.handleChange(e.target.value)}}></input>
          <button type="button" onClick={()=>{this.handleSearchClick("Hey I am clicked")}}>Search</button>
         
     {listOfMoviesDisplayed}
