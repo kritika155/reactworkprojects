@@ -4,6 +4,8 @@ import axios from 'axios';
 import dateFormat from 'dateformat';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
 export default class Edit extends Component {
     constructor(props) {
         super(props)
@@ -74,7 +76,17 @@ export default class Edit extends Component {
 
     render() {
         return (
-            <div className="container register-form">
+           <div>
+                {/* <Button variant="outlined" color="primary"  className="btn btn-primary btn-lg">
+      <Link to={{ 
+                 pathname: './addmovie',
+               }}>Go Back
+     </Link>
+       </Button> */}
+                <div className="container register-form">
+                 
+                <h1 style={{textAlign:'center',filter:'grayscale(100%)'}}>{this.state.name}</h1>
+                <img src={this.state.image_url} alt={this.state.name} className="movie" style={{width:'100px',marginLeft:'139px'}}/>
                 <form onSubmit={this.handleSubmit} method="POST" align="center">
                     <label>Id</label><br/>
                     <input name="id" placeholder="id" 
@@ -101,6 +113,7 @@ export default class Edit extends Component {
                     </div>
                 </form>
             </div>
+           </div>
         );
     }
 }

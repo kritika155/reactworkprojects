@@ -17,13 +17,14 @@ export default class App extends Component {
       this.setState({
         data:data
       },()=>console.log(data))
-    })
+    }).catch(err=>console.log(err));
   }
    delete(id){
     //  const url="http://localhost:3000/api/movies";
     fetch('http://localhost:3000/api/movies/' + id, { 
   method: 'DELETE' 
-}).then(response=>{return response.json()}).then(data=>console.log(data)).catch(err=>console.log(err));}
+}).then(response=>{return response.json()}).then(data=>console.log(data)).catch(err=>console.log(err));
+}
   render() {
   
     let movies=this.state.data.length>0&&this.state.data.map((movie,index)=>{
@@ -60,12 +61,20 @@ export default class App extends Component {
       );
     })
     return (
-      <div><h1 align="center">Top Movies   <Button variant="outlined" color="primary"  className="btn btn-primary btn-lg">
+      <div><h1 align="center">Top Movies 
+        <Button variant="outlined" color="primary"  className="btn btn-primary btn-lg">
       <Link to={{ 
                  pathname: './addmovie',
                }}>+Add Movies
      </Link>
-       </Button> </h1>
+       </Button>
+       <Button variant="outlined" color="primary"  className="btn btn-primary btn-lg">
+      <Link to={{ 
+                 pathname: './search',
+               }}>+Search
+     </Link>
+       </Button>
+        </h1>
     
         <br />
         {movies}

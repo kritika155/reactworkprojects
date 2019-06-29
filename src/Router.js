@@ -4,6 +4,8 @@ import AddMovie from './AddMovie';
 import App from "./App";
 import Product from "./Product";
 import Edit from './Edit';
+import Search from './Search';
+
 const Router = () => (
   <BrowserRouter>
     <Switch>
@@ -11,6 +13,8 @@ const Router = () => (
       <Route path="/product" component={Product} />
       <Route path="/addmovie" component={AddMovie} />
       <Route path="/editmovie/:id" component={Edit} />
+      <Route path="/search" component={Search} />
+
     </Switch>
   </BrowserRouter>
 );

@@ -7,6 +7,11 @@
    height:250px;
    margin-top:45px;
 }
+.boxe img{
+   width: 210px;
+   height:200px;
+   
+}
 .btn{
    float:right;
 }
